@@ -2,9 +2,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
-using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -23,6 +21,18 @@ namespace API.Controllers
         {
             var products = await _repo.GetProductsAsync();
             return Ok(products);
+        }
+
+        [HttpGet("brands")]
+        public async Task<ActionResult<IReadOnlyList<ProductBrand>>> GetProductBrands()
+        {
+            return Ok(await _repo.GetProductBrandsAsync());
+        }
+
+        [HttpGet("types")]
+        public async Task<ActionResult<IReadOnlyList<ProductType>>> GetProductTypes()
+        {
+            return Ok(await _repo.GetProductTypesAsync());
         }
 
         [HttpGet("{id}")]
